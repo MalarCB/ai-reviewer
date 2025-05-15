@@ -9,7 +9,7 @@
 
 <br/>
 
-Optimize your code review process with Presubmit's AI Code Reviewer that catches bugs, suggests improvements, and provides meaningful summary - all before human reviewers take their first look.
+Optimize your code review process with AI Code Reviewer that catches bugs, suggests improvements, and provides meaningful summary - all before human reviewers take their first look.
 
 - 🔍 **Instant, In-depth PR Analysis**: Catches bugs, security issues, and optimization opportunities in real-time
 - 🎯 **Focus on What Matters**: Let AI handle the basics while humans focus on architecture and complex logic

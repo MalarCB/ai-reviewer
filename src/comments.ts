@@ -37,7 +37,7 @@ export async function listPullRequestCommentThreads(
     ...c,
     user: {
       ...c.user,
-      login: isOwnComment(c.body) ? "presubmit" : c.user.login,
+      login: isOwnComment(c.body) ? "codereview" : c.user.login,
     },
   }));
 

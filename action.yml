@@ -1,4 +1,4 @@
-name: "codereview - AI Code Review & Fixes"
+name: "codereview.ai"
 description: "AI-powered code reviews that detect issues, provide summaries, and suggest auto-fixes on PRs."
 author: "codereview.ai"
 branding:
