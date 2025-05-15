@@ -283,11 +283,17 @@ async function submitReview(
       comments: commentsData,
     });
 
+    let event_name: "APPROVE" | "REQUEST_CHANGES" | "COMMENT" = "APPROVE";
+
+    if (lineComments.length > 0) {
+      event_name = lineComments[0].critical ? "REQUEST_CHANGES" : "COMMENT";
+    }
+
     await octokit.pulls.submitReview({
       ...context.repo,
       pull_number: pull_request.number,
       review_id: review.data.id,
-      event: "COMMENT",
+      event: event_name,
       body: buildReviewSummary(
         context,
         files,
