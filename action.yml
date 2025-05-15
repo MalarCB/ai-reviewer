@@ -1,0 +1,17 @@
+name: "codereview - AI Code Review & Fixes"
+description: "AI-powered code reviews that detect issues, provide summaries, and suggest auto-fixes on PRs."
+author: "codereview.ai"
+branding:
+  icon: "check-square"
+  color: "green"
+  tags: "ai,code-review,ai-assisted,automation,pull-requests,linting,ci,autofix,devtools"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
+
+inputs:
+  style_guide_rules:
+    required: false
+    description: 'Custom style guide rules that will be enforced during review by generating critical comments'
+    default: ''
