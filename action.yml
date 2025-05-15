@@ -1,4 +1,4 @@
-name: "DSADcodereview - AI Code Review & Fixes"
+name: "codereview - AI Code Review & Fixes"
 description: "AI-powered code reviews that detect issues, provide summaries, and suggest auto-fixes on PRs."
 author: "dsadcodereview.ai"
 branding:
