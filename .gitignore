@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+
+# Build outputs
+*.tsbuildinfo
+*-lock.yaml
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+*.sh
