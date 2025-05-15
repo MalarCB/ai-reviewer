@@ -1,15 +1,14 @@
-import { 
-  buildLoadingMessage, 
-  buildOverviewMessage, 
+import { Context } from '@actions/github/lib/context';
+import { FileDiff } from '../diff';
+import {
+  buildLoadingMessage,
+  buildOverviewMessage,
   buildReviewSummary,
   OVERVIEW_MESSAGE_SIGNATURE,
-  PAYLOAD_TAG_OPEN,
-  PAYLOAD_TAG_CLOSE
+  PAYLOAD_TAG_CLOSE,
+  PAYLOAD_TAG_OPEN
 } from '../messages';
-import { FileDiff } from '../diff';
-import { Context } from '@actions/github/lib/context';
 import { AIComment, PullRequestSummary } from '../prompts';
-import config from '../config';
 
 // Mock the GitHub context
 jest.mock('@actions/github', () => ({
@@ -36,7 +35,7 @@ describe('Messages', () => {
   const mockContext = {
     repo: { owner: 'test-owner', repo: 'test-repo' }
   } as Context;
-  
+
   const mockFileDiffs: FileDiff[] = [
     {
       filename: 'src/test1.ts',
@@ -49,15 +48,15 @@ describe('Messages', () => {
       hunks: [{ startLine: 1, endLine: 3, diff: '@@ -0,0 +1,3 @@\n+new file\n+content\n+here' }]
     }
   ];
-  
+
   const mockCommits = [
     { sha: 'abc123', commit: { message: 'First commit' } },
     { sha: 'def456', commit: { message: 'Second commit' } }
   ];
-  
+
   test('buildLoadingMessage formats correctly', () => {
     const message = buildLoadingMessage('base-sha', mockCommits, mockFileDiffs);
-    
+
     expect(message).toContain('Analyzing changes in this PR');
     expect(message).toContain('base-sh');
     expect(message).toContain('abc123');
@@ -68,7 +67,7 @@ describe('Messages', () => {
     expect(message).toContain('src/test2.ts');
     expect(message).toContain(OVERVIEW_MESSAGE_SIGNATURE);
   });
-  
+
   test('buildOverviewMessage formats correctly', () => {
     const mockSummary: PullRequestSummary = {
       title: 'Test PR',
@@ -79,9 +78,9 @@ describe('Messages', () => {
       ],
       type: ['ENHANCEMENT']
     };
-    
+
     const message = buildOverviewMessage(mockSummary, ['commit1', 'commit2']);
-    
+
     expect(message).toContain('PR Summary');
     expect(message).toContain('This is a test PR');
     expect(message).toContain('src/test1.ts');
@@ -93,7 +92,7 @@ describe('Messages', () => {
     expect(message).toContain(PAYLOAD_TAG_CLOSE);
     expect(message).toContain('"commits":["commit1","commit2"]');
   });
-  
+
   test('buildReviewSummary formats correctly with comments', () => {
     const mockActionableComments: AIComment[] = [
       {
@@ -107,7 +106,7 @@ describe('Messages', () => {
         critical: true
       }
     ];
-    
+
     const mockSkippedComments: AIComment[] = [
       {
         file: 'src/test2.ts',
@@ -120,7 +119,7 @@ describe('Messages', () => {
         critical: false
       }
     ];
-    
+
     const summary = buildReviewSummary(
       mockContext,
       mockFileDiffs,
@@ -128,7 +127,7 @@ describe('Messages', () => {
       mockActionableComments,
       mockSkippedComments
     );
-    
+
     expect(summary).toContain('Pull request needs attention');
     expect(summary).toContain('Review Summary');
     expect(summary).toContain('Commits Considered (2)');
@@ -140,7 +139,7 @@ describe('Messages', () => {
     expect(summary).toContain('src/test2.ts [1-1]');
     expect(summary).toContain('style: "Style suggestion"');
   });
-  
+
   test('buildReviewSummary formats correctly with no comments', () => {
     const summary = buildReviewSummary(
       mockContext,
@@ -149,7 +148,7 @@ describe('Messages', () => {
       [],
       []
     );
-    
+
     expect(summary).toContain('LGTM!');
     expect(summary).toContain('Actionable Comments (0)');
     expect(summary).toContain('Skipped Comments (0)');

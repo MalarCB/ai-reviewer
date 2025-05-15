@@ -159,7 +159,7 @@ export async function handlePullRequest() {
     pull_request.title.includes("@codereviewai") ||
     pull_request.title.includes("@codereview")
   ) {
-    info(`title contains mention of codereview.ai, so generating a new title`);
+    info(`title contains mention of coderview.ai, so generating a new title`);
     await octokit.rest.pulls.update({
       ...context.repo,
       pull_number: pull_request.number,
