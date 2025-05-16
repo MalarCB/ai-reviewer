@@ -1,4 +1,4 @@
-import { info, warning } from "@actions/core";
+import { info, setFailed, warning } from "@actions/core";
 import { Context } from "@actions/github/lib/context";
 import { Octokit } from "@octokit/action";
 import { buildComment, listPullRequestCommentThreads } from "./comments";
@@ -193,6 +193,7 @@ export async function handlePullRequest() {
   const comments = review.comments.filter(
     (c) => c.content.trim() !== "" && files.some((f) => f.filename === c.file)
   );
+
   await submitReview(
     octokit,
     context,
@@ -205,6 +206,13 @@ export async function handlePullRequest() {
     filesToReview
   );
   info(`posted review comments`);
+  const criticalComments = comments.filter((c) => c.critical);
+  if (criticalComments.length > 0) {
+    info(
+      `found ${criticalComments.length} critical comments, so requesting changes`
+    );
+    setFailed("❌ Code review failed due to critical errors. Address and resubmit.");
+  }
 }
 
 async function submitReview(
