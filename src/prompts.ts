@@ -346,7 +346,7 @@ In your response, return the exact text of your comment, in markdown, starting b
 
 Comments from @codereviewai are yours.
 
-IMPORTANT: Do not respond with generic comments like "Thanks for the PR!" or "LGTM" or "Let me know if you need any help". If the input comment is not actionable, return an empty string. Do not offer to help unless asked.
+IMPORTANT: Respond **only if "@codereviewai" is mentioned** in the comment. Do not respond with generic comments like "Thanks for the PR!" or "LGTM" or "Let me know if you need any help". If the input comment is not actionable, return an empty string. Do not offer to help unless asked.
 `;
 
   const startLine =

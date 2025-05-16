@@ -124,13 +124,13 @@ export function buildReviewSummary(
   if (actionableComments.length === 0) {
     body += `✅ **LGTM!**\n\n`;
   } else {
-    body += `🚨 **Pull request needs attention.**\n\n`;
+    body += `🔴 **Pull request needs attention.**\n\n`;
   }
 
   body += "### Review Summary\n\n";
 
   // Commits section
-  body += `<details>\n<summary>Commits Considered (${commits.length})</summary>\n\n`;
+  body += `<details>\n<summary>📝 Commits Considered (${commits.length})</summary>\n\n`;
   for (const commit of commits) {
     body += `- [${commit.sha.slice(
       0,
@@ -141,7 +141,7 @@ export function buildReviewSummary(
   body += "\n</details>\n\n";
 
   // Files section
-  body += `<details>\n<summary>Files Processed (${files.length})</summary>\n\n`;
+  body += `<details>\n<summary>📁 Files Processed (${files.length})</summary>\n\n`;
   for (const diff of files) {
     let fileText = `- ${diff.filename}`;
     if (diff.status === "renamed") {
@@ -154,7 +154,7 @@ export function buildReviewSummary(
   body += "\n</details>\n\n";
 
   // Actionable comments section
-  body += `<details>\n<summary>Actionable Comments (${actionableComments.length})</summary>\n\n`;
+  body += `<details>\n<summary>🔥 Actionable Comments (${actionableComments.length})</summary>\n\n`;
   for (const comment of actionableComments) {
     body += `- <details>\n`;
     body += `  <summary>${comment.file} [${comment.start_line}-${comment.end_line}]</summary>\n\n`;
@@ -164,7 +164,7 @@ export function buildReviewSummary(
   body += "\n</details>\n\n";
 
   // Skipped comments section
-  body += `<details>\n<summary>Skipped Comments (${skippedComments.length})</summary>\n\n`;
+  body += `<details>\n<summary>✔️ Skipped Comments (${skippedComments.length})</summary>\n\n`;
   for (const comment of skippedComments) {
     body += `- <details>\n`;
     body += `  <summary>${comment.file} [${comment.start_line}-${comment.end_line}]</summary>\n\n`;
