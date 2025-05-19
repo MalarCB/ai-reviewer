@@ -1,4 +1,3 @@
-import { info } from "@actions/core";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
@@ -109,7 +108,7 @@ export async function runPrompt({
   // if (process.env.DEBUG) {
   //   info(`usage: \n${JSON.stringify(usage, null, 2)}`);
   // }
-  info(`usage: \n${JSON.stringify(usage, null, 2)}`);
+  console.log(`usage: \n${JSON.stringify(usage, null, 2)}`);
 
   return object;
 }
