@@ -1,10 +1,10 @@
-import config from "./config";
+import { info } from "@actions/core";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateObject } from "ai";
-import { info } from "@actions/core";
 import { z } from "zod";
+import config from "./config";
 
 const LLM_MODELS = [
   // Anthropic
@@ -106,9 +106,10 @@ export async function runPrompt({
     schema,
   });
 
-  if (process.env.DEBUG) {
-    info(`usage: \n${JSON.stringify(usage, null, 2)}`);
-  }
+  // if (process.env.DEBUG) {
+  //   info(`usage: \n${JSON.stringify(usage, null, 2)}`);
+  // }
+  info(`usage: \n${JSON.stringify(usage, null, 2)}`);
 
   return object;
 }
